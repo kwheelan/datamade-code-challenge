@@ -28,7 +28,7 @@ class AddressParse(APIView):
             return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
         # Use parse method to get address_components and address_type
-        address_components, address_type = self.parse(request)
+        address_components, address_type = self.parse(address)
 
         # if parse returns an error, pass error details to frontend
         if isinstance(address_components, Exception):
