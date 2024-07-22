@@ -9,7 +9,6 @@ from rest_framework import status
 class Home(TemplateView):
     template_name = 'parserator_web/index.html'
 
-
 class AddressParse(APIView):
     renderer_classes = [JSONRenderer]
 
@@ -51,7 +50,6 @@ class AddressParse(APIView):
                 'message' : None
             }
             return Response(data, status = status.HTTP_200_OK)            
-        
 
     def parse(self, address):
         ''' Return the parsed components of a given address using usaddress '''
