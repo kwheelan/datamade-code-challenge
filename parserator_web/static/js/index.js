@@ -9,10 +9,8 @@ function handleFormSubmit(event) {
    var address = document.getElementById('address').value;
 
    // Retrieve API result from given address
-   var parsedAddress = parseAddress(address);
+   parseAddress(address);
 
-   // display results on the page
-   var displayAddress(parsedAddress);
 }
 
 // Function to parse the address using API call
@@ -21,12 +19,43 @@ function parseAddress(address) {
    fetch('/api/parse?address=' + encodeURIComponent(address))
       .then(response => response.json())
       .then(data => {
-         return data;
+         // If it fetched an address properly, display it on the page
+         displayAddress(data);
       })
       .catch(error => {
          console.log(`Unexpected Error : ${error}`);
-         return;
       });
+}
+
+// function to display results from API
+function displayAddress(data){
+
+   if(data){
+
+      // fill in address type span
+      document.getElementById('parse-type').textContent = data.address_type;
+
+      // find div and table inside
+      var resultsDiv = document.getElementById('address-results');
+      // var table = resultsDiv.querySelector('tbody');
+      // // add a row for each address component
+      // parsedAddress.array.forEach(addressComponent => {
+      //    // create the row element and add it to the table
+      //    var newRow = document.createElement('tr');
+      //    table.appendChild(newRow);
+      //    // create cells for the address part and the tag
+      //    var addressPartCell = document.createElement('td');
+      //    addressPartCell.textContent = addressComponent.tag;
+      //    newRow.appendChild()
+      //    var tagCell = document.createElement('td');
+
+      // });
+
+      // Make the results div visible
+      resultsDiv.style.display = '';
+
+   }
+
 }
 
 /* Action when page is loaded */
