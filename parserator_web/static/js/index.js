@@ -37,19 +37,25 @@ function displayAddress(data){
 
       // find div and table inside
       var resultsDiv = document.getElementById('address-results');
-      // var table = resultsDiv.querySelector('tbody');
-      // // add a row for each address component
-      // parsedAddress.array.forEach(addressComponent => {
-      //    // create the row element and add it to the table
-      //    var newRow = document.createElement('tr');
-      //    table.appendChild(newRow);
-      //    // create cells for the address part and the tag
-      //    var addressPartCell = document.createElement('td');
-      //    addressPartCell.textContent = addressComponent.tag;
-      //    newRow.appendChild()
-      //    var tagCell = document.createElement('td');
+      var table = resultsDiv.querySelector('tbody');
 
-      // });
+      // clear table body
+      table.innerHTML = '';
+
+      // todo: clean up this part
+      // add a row for each address component
+      Object.keys(data.address_components).forEach(key => {
+         // create the row element and add it to the table
+         var newRow = document.createElement('tr');
+         table.appendChild(newRow);
+         // create cells for the address part and the tag
+         var addressPartCell = document.createElement('td');
+         addressPartCell.textContent = key;
+         newRow.appendChild(addressPartCell);
+         var tagCell = document.createElement('td');
+         tagCell.textContent = data.address_components[key];
+         newRow.appendChild(tagCell);
+      });
 
       // Make the results div visible
       resultsDiv.style.display = '';
