@@ -63,6 +63,6 @@ class AddressParse(APIView):
         try:
             address_components, address_type = usaddress.tag(address)
             return address_components, address_type  
-        # Raise ParseError for any other exception
+        # Raise ParseError for any exception
         except Exception as e:
             raise ParseError(detail=str(e))  
