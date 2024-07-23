@@ -1,4 +1,4 @@
-/* The following wires the form submission to the API and then displays the results */
+/* The following code wires the form submission to the API and then displays the results */
 
 // Function to handle the form submission
 function handleFormSubmit(event) {
@@ -32,7 +32,7 @@ function displayAddress(data){
 
    if(data){
 
-      // fill in address type span
+      // fill in address type on the page
       document.getElementById('parse-type').textContent = data.address_type;
 
       // find div and table inside
@@ -42,16 +42,19 @@ function displayAddress(data){
       // clear table body
       table.innerHTML = '';
 
-      // todo: clean up this part
+      // get the names of all the address components
+      var addressComps = Object.keys(data.address_components)
+
       // add a row for each address component
-      Object.keys(data.address_components).forEach(key => {
+      addressComps.forEach(key => {
          // create the row element and add it to the table
          var newRow = document.createElement('tr');
          table.appendChild(newRow);
-         // create cells for the address part and the tag
+         // create a table cell for the address part name (ex. AddressNumber)
          var addressPartCell = document.createElement('td');
          addressPartCell.textContent = key;
          newRow.appendChild(addressPartCell);
+         // create a table cell for the tag (ex. 123 for AddressNumber)
          var tagCell = document.createElement('td');
          tagCell.textContent = data.address_components[key];
          newRow.appendChild(tagCell);
