@@ -15,7 +15,7 @@ class AddressParse(APIView):
     def get(self, request):
         '''Parse an address string and return the parsed components to the frontend.'''
 
-        # get address parameter from request
+        # Get 'address' parameter from the request
         address = request.query_params.get('address', None)
         if not address:
             data = {
@@ -28,7 +28,7 @@ class AddressParse(APIView):
             return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
         try:
-            # Use parse method to get address_components and address_type
+            # Parse the address and return expected result
             address_components, address_type = self.parse(address)
             data = {
                 'input_string': address,
@@ -38,9 +38,8 @@ class AddressParse(APIView):
             }
             return Response(data, status = status.HTTP_200_OK) 
         
-        # if parse returns an error, pass error details to frontend
         except ParseError as e:
-            # trim error message to make it readable
+            # Extract and trim the error message for readability
             full_message = str(e)
             if 'ERROR:' in full_message and "ORIGINAL STRING:" in full_message:
                 error_message = full_message.split("ERROR:", 1)[-1].split("ORIGINAL STRING:", 1)[0].strip()
