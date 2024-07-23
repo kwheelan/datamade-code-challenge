@@ -20,7 +20,12 @@ function parseAddress(address) {
       .then(response => response.json())
       .then(data => {
          // If it fetched an address properly, display it on the page
-         displayAddress(data);
+         if (data.status == 'success'){
+            displayAddress(data);
+         } else {
+            // if there was an error, display it
+            displayError(data);
+         }
       })
       .catch(error => {
          console.log(`Unexpected Error : ${error}`);
@@ -31,6 +36,9 @@ function parseAddress(address) {
 function displayAddress(data){
 
    if(data){
+
+      // hide error section
+      document.getElementById('error-results').style.display = 'none';
 
       // fill in address type on the page
       document.getElementById('parse-type').textContent = data.address_type;
@@ -62,8 +70,19 @@ function displayAddress(data){
 
       // Make the results div visible
       resultsDiv.style.display = '';
-
    }
+}
+
+function displayError(data){
+
+   // get error messsage and place inside appropriate span
+   document.getElementById('error-message').textContent = data.message;
+
+   // hide results section
+   document.getElementById('address-results').style.display = 'none';
+
+   // show error section
+   document.getElementById('error-results').style.display = '';
 
 }
 
