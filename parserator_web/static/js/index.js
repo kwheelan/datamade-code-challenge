@@ -27,9 +27,9 @@ function parseAddress(address) {
             displayError(data);
          }
       })
-      .catch(error => {
-         console.log(`Unexpected Error : ${error}`);
-      });
+      // .catch(error => {
+      //    console.log(`Unexpected Error : ${error}`);
+      // });
 }
 
 // function to display results from API
