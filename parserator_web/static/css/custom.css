@@ -1,1 +1,6 @@
 /* Add custom style overrides here. */
+
+/* Add a little space above the results box */
+#address-results, #error-results {
+    margin-top : 20px;
+}
