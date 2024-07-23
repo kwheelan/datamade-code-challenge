@@ -29,6 +29,8 @@ function parseAddress(address) {
       })
       .catch(error => {
          console.log(`Unexpected Error : ${error}`);
+         // Display a general error message
+         displayError({ message: 'Something went wrong. Please try again later.' });
       });
 }
 
